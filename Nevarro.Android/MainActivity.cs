@@ -18,7 +18,7 @@ namespace Nevarro.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+            HingeService.MainActivity = this;
             base.OnCreate(savedInstanceState);
             global::Xamarin.Forms.Forms.SetFlags("IndicatorView_Experimental", "CarouselView_Experimental");
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
