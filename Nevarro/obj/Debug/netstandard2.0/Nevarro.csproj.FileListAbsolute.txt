@@ -1,0 +1,15 @@
+/Users/saramorsi/Projects/Nevarro/Nevarro/bin/Debug/netstandard2.0/Nevarro.deps.json
+/Users/saramorsi/Projects/Nevarro/Nevarro/bin/Debug/netstandard2.0/Nevarro.dll
+/Users/saramorsi/Projects/Nevarro/Nevarro/bin/Debug/netstandard2.0/ref/Nevarro.dll
+/Users/saramorsi/Projects/Nevarro/Nevarro/bin/Debug/netstandard2.0/Nevarro.pdb
+/Users/saramorsi/Projects/Nevarro/Nevarro/obj/Debug/netstandard2.0/App.xaml.g.cs
+/Users/saramorsi/Projects/Nevarro/Nevarro/obj/Debug/netstandard2.0/CompanionPane/CompanionPane.xaml.g.cs
+/Users/saramorsi/Projects/Nevarro/Nevarro/obj/Debug/netstandard2.0/MainPage.xaml.g.cs
+/Users/saramorsi/Projects/Nevarro/Nevarro/obj/Debug/netstandard2.0/TwoPage.xaml.g.cs
+/Users/saramorsi/Projects/Nevarro/Nevarro/obj/Debug/netstandard2.0/Nevarro.csproj.CoreCompileInputs.cache
+/Users/saramorsi/Projects/Nevarro/Nevarro/obj/Debug/netstandard2.0/Nevarro.AssemblyInfoInputs.cache
+/Users/saramorsi/Projects/Nevarro/Nevarro/obj/Debug/netstandard2.0/Nevarro.AssemblyInfo.cs
+/Users/saramorsi/Projects/Nevarro/Nevarro/obj/Debug/netstandard2.0/XamlC.stamp
+/Users/saramorsi/Projects/Nevarro/Nevarro/obj/Debug/netstandard2.0/Nevarro.dll
+/Users/saramorsi/Projects/Nevarro/Nevarro/obj/Debug/netstandard2.0/ref/Nevarro.dll
+/Users/saramorsi/Projects/Nevarro/Nevarro/obj/Debug/netstandard2.0/Nevarro.pdb

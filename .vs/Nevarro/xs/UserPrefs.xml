@@ -1,0 +1,56 @@
+﻿<Properties StartupConfiguration="{46CD048D-986E-4D67-9C3D-FF0E8269C759}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Nevarro/FormsWindow.cs">
+    <Files>
+      <File FileName="Nevarro.Android/MainActivity.cs" Line="20" Column="55" />
+      <File FileName="Nevarro.Android/Properties/AssemblyInfo.cs" />
+      <File FileName="Nevarro/MainPage.xaml.cs" Line="16" Column="26" />
+      <File FileName="Nevarro/App.xaml.cs" Line="11" Column="35" />
+      <File FileName="Nevarro/App.xaml" Line="5" Column="14" />
+      <File FileName="Nevarro.Android/HingeService.cs" Line="106" Column="1" />
+      <File FileName="Nevarro.Android/LayoutService.cs" Line="17" Column="18" />
+      <File FileName="Nevarro/IHingeService.cs" Line="23" Column="12" />
+      <File FileName="Nevarro/MainPage.xaml" Line="15" Column="22" />
+      <File FileName="Nevarro/TwoPaneView.cs" Line="184" Column="27" />
+      <File FileName="Nevarro/FormsWindow.cs" Line="315" Column="33" />
+      <File FileName="Nevarro/TwoPage.xaml" Line="8" Column="48" />
+      <File FileName="Nevarro/CompanionPane/CompanionPane.xaml" Line="10" Column="41" />
+      <File FileName="Nevarro/CompanionPane/CompanionPane.xaml.cs" Line="11" Column="49" />
+      <File FileName="Nevarro/DuoPage.cs" Line="10" Column="39" />
+      <File FileName="Nevarro/TwoPage.xaml.cs" Line="20" Column="42" />
+      <File FileName="Nevarro/AssemblyInfo.cs" Line="1" Column="1" />
+      <File FileName="Nevarro.Android/Properties/AndroidManifest.xml" />
+      <File FileName="Nevarro.Android/Resources/values/colors.xml" />
+      <File FileName="Nevarro.Android/Resources/values/styles.xml" />
+      <File FileName="Nevarro.Android/Resources/layout/Tabbar.xml" />
+      <File FileName="Nevarro.Android/Resources/layout/Toolbar.xml" />
+      <File FileName="Nevarro/ILayoutService.cs" Line="1" Column="1" />
+      <File FileName="Nevarro/obj/Debug/netstandard2.0/CompanionPane/CompanionPane.xaml.g.cs" Line="41" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="Nevarro" expanded="True">
+            <Node name="Nevarro" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+                <Node name="SdkDependencies" expanded="True" />
+              </Node>
+              <Node name="CompanionPane" expanded="True">
+                <Node name="CompanionPane.xaml" expanded="True" />
+              </Node>
+              <Node name="FormsWindow.cs" selected="True" />
+            </Node>
+            <Node name="Nevarro.Android" expanded="True" />
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.ItemProperties.Nevarro.Android AndroidDesignerPreferredDevice="Nexus 4" PreferredExecutionTarget="Android.emulator-5578" />
+</Properties>
