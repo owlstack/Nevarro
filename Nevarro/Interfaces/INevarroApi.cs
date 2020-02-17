@@ -9,6 +9,6 @@ namespace Nevarro.Interfaces
     public interface INevarroApi
     {
         [Get("/images")]
-        Task<List<Uri>> GetImages();
+        Task<ObservableCollection<Uri>> GetImages();
     }
 }

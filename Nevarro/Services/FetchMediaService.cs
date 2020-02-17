@@ -12,7 +12,7 @@ namespace Nevarro.Services
         public static INevarroApi apiService;
         static string baseUrl = "http://10.0.2.2:5000";
 
-        public static async Task<List<Uri>> CallImagesEndpoint()
+        public static async Task<ObservableCollection<Uri>> CallImagesEndpoint()
         {
             apiService = RestService.For<INevarroApi>(baseUrl);
             var images = await apiService.GetImages();

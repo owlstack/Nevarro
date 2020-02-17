@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Nevarro.Services;
@@ -11,14 +12,14 @@ using Xamarin.Forms.Xaml;
 namespace Nevarro
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class TwoPage : ContentPage
+	public partial class TwoPage : ContentPage, INotifyPropertyChanged
 	{
 		IItemsLayout horizontalLayout = null;
 		IItemsLayout verticalItemsLayout = null;
 		bool disableUpdates = false;
 		private double contentWidth;
 		private double contentHeight;
-		private ObservableCollection<string> imagesList; 
+		private ObservableCollection<Uri> imagesList;
 
 		public DualScreenInfo DualScreenLayoutInfo { get; }
 		bool IsSpanned => DualScreenLayoutInfo.SpanningBounds.Length > 0;
@@ -39,8 +40,8 @@ namespace Nevarro
 			DualScreenLayoutInfo.PropertyChanged += OnFormsWindowPropertyChanged;
 			DualScreenInfo.Current.PropertyChanged += OnFormsWindowPropertyChanged;
 			var images = await FetchMediaService.CallImagesEndpoint();
-
-            Console.WriteLine(images);
+			ImagesList = images;
+			cv.ItemsSource = ImagesList;
 			SetupCollectionViewLayoutAsync();
 		}
 
@@ -89,7 +90,7 @@ namespace Nevarro
 			}
 		}
 
-		public ObservableCollection<string> ImagesList
+		public ObservableCollection<Uri> ImagesList
         {
 			get => imagesList;
             set
@@ -101,8 +102,7 @@ namespace Nevarro
 				OnPropertyChanged(nameof(ImagesList));
             }
         }
-
-
+       
 		public double Pane1Height => IsSpanned ? (DualScreenLayoutInfo.SpanningBounds[0].Height) : layout.Height;
 
 		public double Pane2Height => IsSpanned ? (DualScreenLayoutInfo.SpanningBounds[1].Height) : 0d;
