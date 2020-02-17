@@ -10,7 +10,7 @@ namespace Nevarro.Services
     public static class FetchMediaService
     {
         public static INevarroApi apiService;
-        static string baseUrl = "https://nevarro-backend2.azurewebsites.net";
+        static string baseUrl = "http://10.0.2.2:5000";
 
         public static async Task<List<Uri>> CallImagesEndpoint()
         {
