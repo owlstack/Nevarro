@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.DualScreen;
 
 namespace Nevarro
 {
-    // Learn more about making custom code visible in the Xamarin.Forms previewer
+    //Learn more about making custom code visible in the Xamarin.Forms previewer
     // by visiting https://aka.ms/xamarinforms-previewer
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
@@ -16,7 +17,7 @@ namespace Nevarro
         public MainPage()
         {
             InitializeComponent();
-            twoPaneView.TallModeConfiguration = TwoPaneViewTallModeConfiguration.TopBottom;
+            twoPaneView.TallModeConfiguration = Xamarin.Forms.DualScreen.TwoPaneViewTallModeConfiguration.TopBottom;
         }
 
         void OnNavigateToSample(object sender, EventArgs e)

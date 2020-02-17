@@ -1,105 +1,148 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
+using System.Threading.Tasks;
+using Nevarro.Services;
 using Xamarin.Forms;
+using Xamarin.Forms.DualScreen;
 using Xamarin.Forms.Xaml;
 
 namespace Nevarro
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class TwoPage : DuoPage
-    {
-        IItemsLayout linearLayout = null;
-        IItemsLayout gridLayout = null;
-        bool disableUpdates = false;
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class TwoPage : ContentPage
+	{
+		IItemsLayout horizontalLayout = null;
+		IItemsLayout verticalItemsLayout = null;
+		bool disableUpdates = false;
+		private double contentWidth;
+		private double contentHeight;
+		private ObservableCollection<string> imagesList; 
 
-        public TwoPage()
+		public DualScreenInfo DualScreenLayoutInfo { get; }
+		bool IsSpanned => DualScreenLayoutInfo.SpanningBounds.Length > 0;
+
+		public TwoPage()
+		{
+			InitializeComponent();
+			DualScreenLayoutInfo = new DualScreenInfo(layout);
+
+			cv.ItemsSource =
+				Enumerable.Range(0, 1000)
+					.Select(i => $"Page {i}")
+					.ToList();
+		}
+
+		protected override async void OnAppearing()
+		{
+			DualScreenLayoutInfo.PropertyChanged += OnFormsWindowPropertyChanged;
+			DualScreenInfo.Current.PropertyChanged += OnFormsWindowPropertyChanged;
+			var images = await FetchMediaService.CallImagesEndpoint();
+
+            Console.WriteLine(images);
+			SetupCollectionViewLayoutAsync();
+		}
+
+		protected override void OnDisappearing()
+		{
+			base.OnDisappearing();
+			DualScreenLayoutInfo.PropertyChanged -= OnFormsWindowPropertyChanged;
+			DualScreenInfo.Current.PropertyChanged -= OnFormsWindowPropertyChanged;
+		}
+
+		void OnFormsWindowPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+		{
+			if (Content == null || disableUpdates)
+				return;
+
+			SetupCollectionViewLayoutAsync();
+			if (e.PropertyName == nameof(DualScreenInfo.Current.HingeBounds))
+			{
+				OnPropertyChanged(nameof(HingeWidth));
+			}
+		}
+
+		public double ContentHeight
+		{
+			get => contentHeight;
+			set
+			{
+				if (contentHeight == value)
+					return;
+
+				contentHeight = value;
+				OnPropertyChanged(nameof(ContentHeight));
+			}
+		}
+
+		public double ContentWidth
+		{
+			get => contentWidth;
+			set
+			{
+				if (contentWidth == value)
+					return;
+
+				contentWidth = value;
+				OnPropertyChanged(nameof(ContentWidth));
+			}
+		}
+
+		public ObservableCollection<string> ImagesList
         {
-            InitializeComponent();
-            cv.ItemsSource =
-                Enumerable.Range(0, 1000)
-                    .Select(i => $"Page {i}")
-                    .ToList();
+			get => imagesList;
+            set
+            {
+				if (imagesList == value)
+					return;
 
-            FormsWindow.PropertyChanged += OnFormsWindowPropertyChanged;
+				imagesList = value;
+				OnPropertyChanged(nameof(ImagesList));
+            }
         }
 
-        void OnFormsWindowPropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        {
-            if (Content == null || disableUpdates)
-                return;
 
-            if (e.PropertyName == nameof(FormsWindow.IsLandscape) || e.PropertyName == nameof(FormsWindow.IsPortrait))
-            {
-                SetupColletionViewLayout();
-            }
-            else if (e.PropertyName == nameof(FormsWindow.Pane2))
-            {
-                OnPropertyChanged(nameof(ContentHeight));
-                OnPropertyChanged(nameof(ContentWidth));
-            }
-        }
+		public double Pane1Height => IsSpanned ? (DualScreenLayoutInfo.SpanningBounds[0].Height) : layout.Height;
 
-        public double ContentHeight => (FormsWindow.IsPortrait) ? FormsWindow.Pane1.Height : FormsWindow.Pane1.Height + FormsWindow.Pane2.Height;
+		public double Pane2Height => IsSpanned ? (DualScreenLayoutInfo.SpanningBounds[1].Height) : 0d;
 
-        public double ContentWidth => (FormsWindow.Pane1.Width);
+		public double HingeWidth => DualScreenLayoutInfo?.HingeBounds.Width ?? DualScreenInfo.Current?.HingeBounds.Width ?? 0d;
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-            SetupColletionViewLayout();
-        }
 
-        void SetupColletionViewLayout()
-        {
-            disableUpdates = true;
-            var resetCV = cv;
-            if (linearLayout == null && cv.ItemsLayout is LinearItemsLayout linear)
-            {
-                linearLayout = cv.ItemsLayout;
-                linear.SnapPointsType = SnapPointsType.None;
-                linear.SnapPointsAlignment = SnapPointsAlignment.Start;
-            }
+		void SetupCollectionViewLayoutAsync()
+		{
+			ContentWidth = IsSpanned ? (DualScreenLayoutInfo.SpanningBounds[0].Width) : layout.Width;
+			ContentHeight = (!DualScreenLayoutInfo.IsLandscape) ? Pane1Height : Pane1Height + Pane2Height;
+			disableUpdates = true;
 
-            if (gridLayout == null && cv.ItemsLayout is GridItemsLayout)
-                gridLayout = cv.ItemsLayout;
+			if (verticalItemsLayout == null)
+			{
+				horizontalLayout = cv.ItemsLayout;
+				verticalItemsLayout = new LinearItemsLayout(ItemsLayoutOrientation.Vertical)
+				{
+					SnapPointsAlignment = SnapPointsAlignment.Start,
+					SnapPointsType = SnapPointsType.None
+				};
+			}
 
-            if (FormsWindow.IsLandscape)
-            {
-                if (cv.ItemsLayout != linearLayout)
-                {
-                    resetCV.ItemsSource = null;
-                    resetCV.ItemsLayout = linearLayout;
-                    Content = null;
-                }
-            }
-            else
-            {
-                if (cv.ItemsLayout != gridLayout)
-                {
-                    resetCV.ItemsSource = null;
-                    resetCV.ItemsLayout = gridLayout;
-                    Content = null;
-                }
-            }
+			if (!DualScreenLayoutInfo.IsLandscape)
+			{
+				if (cv.ItemsLayout != horizontalLayout)
+				{
+					cv.ItemsLayout = horizontalLayout;
+				}
+			}
+			else
+			{
 
-            if (Content == null)
-            {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    Content = resetCV;
-                    resetCV.ItemsSource =
-                        Enumerable.Range(0, 1000)
-                            .Select(i => $"Page {i}")
-                            .ToList();
+				if (cv.ItemsLayout != verticalItemsLayout)
+				{
+					cv.ItemsLayout = verticalItemsLayout;
+				}
+			}
 
-                    disableUpdates = false;
-                });
-            }
-            else
-            {
-                disableUpdates = false;
-            }
-        }
-    }
+			disableUpdates = false;
+		}
+	}
 }

@@ -1,21 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<local:DuoPage xmlns="http://xamarin.com/schemas/2014/forms"
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:d="http://xamarin.com/schemas/2014/forms/design"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Nevarro.TwoPage"
-             xmlns:local="clr-namespace:Nevarro"
              Visual="Material"
              x:Name="mainPage">
-    <local:DuoPage.Content>
-        <CollectionView x:Name="cv" BackgroundColor="LightGray">
+   
+    <Grid x:Name="layout">
+        <CollectionView x:Name="cv" BackgroundColor="LightGray" ItemsSource="{Binding ImagesList}">
             <CollectionView.ItemsLayout>
-                <GridItemsLayout 
+                <LinearItemsLayout 
                     SnapPointsAlignment="Start" 
                     SnapPointsType="MandatorySingle"
                     Orientation="Horizontal"
-                    HorizontalItemSpacing="{Binding Source={x:Reference mainPage}, Path=FormsWindow.Hinge.Width}" />
+                    ItemSpacing="{Binding Source={x:Reference mainPage}, Path=HingeWidth}" />
             </CollectionView.ItemsLayout>
             <CollectionView.ItemTemplate>
                 <DataTemplate>
@@ -23,11 +23,14 @@
                            WidthRequest="{Binding Source={x:Reference mainPage}, Path=ContentWidth}"
                            HeightRequest="{Binding Source={x:Reference mainPage}, Path=ContentHeight}">
                         <Frame Margin="20" BackgroundColor="White">
-                            <Label FontSize="Large" Text="{Binding .}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center"></Label>
+                         <!--   <Label FontSize="Large" Text="{Binding .}" VerticalTextAlignment="Center" HorizontalTextAlignment="Center" HorizontalOptions="Center" VerticalOptions="Center"></Label> -->
+                          <Image
+                                   Source="{Binding ImagesList}"
+                                   Aspect="AspectFill" />
                         </Frame>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-    </local:DuoPage.Content>
-</local:DuoPage>
+    </Grid>
+</ContentPage>

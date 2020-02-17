@@ -18,18 +18,12 @@ namespace Nevarro.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-            HingeService.MainActivity = this;
-            base.OnCreate(savedInstanceState);
-            global::Xamarin.Forms.Forms.SetFlags("IndicatorView_Experimental", "CarouselView_Experimental");
-            Xamarin.Essentials.Platform.Init(this, savedInstanceState);
-            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
-            LoadApplication(new App());
-        }
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
-        {
-            Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            base.OnCreate(savedInstanceState);
+
+            global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
+            Xamarin.Forms.DualScreen.DualScreenService.Init(this);
+            LoadApplication(new App());
         }
     }
 }

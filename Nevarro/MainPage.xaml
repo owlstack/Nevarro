@@ -6,15 +6,19 @@
              mc:Ignorable="d"
              Visual="Material"
              xmlns:local="clr-namespace:Nevarro"
+             xmlns:dualScreen="clr-namespace:Xamarin.Forms.DualScreen;assembly=Xamarin.Forms.DualScreen"
              x:Class="Nevarro.MainPage">
-    <local:TwoPaneView x:Name="twoPaneView">
-        <StackLayout Padding="20">
-            <Button Text="Companion Pane" Clicked="OnNavigateToSample"></Button>
-            <Button Text="Two Page" Clicked="OnNavigateToSample"></Button>
-        </StackLayout>
-        <StackLayout>
-            <Label HorizontalOptions="Center" VerticalOptions="Center" Text="Welcome to the Duo Samples!!"></Label>
-        </StackLayout>
-    </local:TwoPaneView>
+    <dualScreen:TwoPaneView x:Name="twoPaneView" MinWideModeWidth="0" MinTallModeHeight="0">
+        <dualScreen:TwoPaneView.Pane1>
+            <StackLayout Padding="20">
+                <Button Text="Two Page" Clicked="OnNavigateToSample"></Button>
+                <Button Text="Companion Pane" Clicked="OnNavigateToSample"></Button>
+            </StackLayout>
+        </dualScreen:TwoPaneView.Pane1>
+        <dualScreen:TwoPaneView.Pane2>
+            <StackLayout Padding="20">
+            </StackLayout>
+        </dualScreen:TwoPaneView.Pane2>
+    </dualScreen:TwoPaneView>
 
 </ContentPage>

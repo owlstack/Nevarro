@@ -6,9 +6,8 @@ using Xamarin.Forms.Xaml;
 
 namespace Nevarro
 {
-
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CompanionPane : DuoPage
+    public partial class CompanionPane : ContentPage
     {
         List<string> _dataSource;
         public CompanionPane()
@@ -20,7 +19,7 @@ namespace Nevarro
                     .Select(i => $"{i}")
                     .ToList();
 
-            twoPaneView.TallModeConfiguration = TwoPaneViewTallModeConfiguration.TopBottom;
+            twoPaneView.TallModeConfiguration = Xamarin.Forms.DualScreen.TwoPaneViewTallModeConfiguration.TopBottom;
             cv.ItemsSource = _dataSource;
 
             indicators.SelectedItem = _dataSource[0];
